@@ -290,9 +290,9 @@ static CGPoint  delayOffset = {0.0};
     }];
 }
 
+// http://stackoverflow.com/a/11602040 Keep UITableView static when inserting rows at the top
 - (void)insertOldMessages:(NSArray *)oldMessages completion:(void (^)())completion{
     WEAKSELF
-    NSLog(@"张睿") ;
     [self exChangeMessageDataSourceQueue:^{
         NSMutableArray *messages = [NSMutableArray arrayWithArray:oldMessages];
         [messages addObjectsFromArray:weakSelf.messages];
@@ -742,12 +742,11 @@ static CGPoint  delayOffset = {0.0};
 
 - (NSString *)getRecorderPath {
     NSString *recorderPath = nil;
+    recorderPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
     NSDate *now = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yy-MMMM-dd";
-    recorderPath = [[NSString alloc] initWithFormat:@"%@/Documents/", NSHomeDirectory()];
-    dateFormatter.dateFormat = @"yyyy-MM-dd-hh-mm-ss";
-    recorderPath = [recorderPath stringByAppendingFormat:@"%@-MySound.caf", [dateFormatter stringFromDate:now]];
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmssSSS"];
+    recorderPath = [recorderPath stringByAppendingFormat:@"%@-MySound.m4a", [dateFormatter stringFromDate:now]];
     return recorderPath;
 }
 
@@ -975,7 +974,9 @@ static CGPoint  delayOffset = {0.0};
         
         [self scrollToBottomAnimated:NO];
     } completion:^(BOOL finished) {
-        
+        if (hide) {
+            self.textViewInputViewType = XHInputViewTypeNormal;
+        }
     }];
 }
 
@@ -1228,10 +1229,16 @@ static CGPoint  delayOffset = {0.0};
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     id <XHMessageModel> message = [self.dataSource messageForRowAtIndexPath:indexPath];
     
-    BOOL displayTimestamp = YES;
+    // 如果需要定制复杂的业务UI，那么就实现该DataSource方法
+    if ([self.dataSource respondsToSelector:@selector(tableView:cellForRowAtIndexPath:targetMessage:)]) {
+        UITableViewCell *tableViewCell = [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath targetMessage:message];
+        return tableViewCell;
+    }
     
+    BOOL displayTimestamp = YES;
     if ([self.delegate respondsToSelector:@selector(shouldDisplayTimestampForRowAtIndexPath:)]) {
         displayTimestamp = [self.delegate shouldDisplayTimestampForRowAtIndexPath:indexPath];
     }
@@ -1260,7 +1267,17 @@ static CGPoint  delayOffset = {0.0};
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     id <XHMessageModel> message = [self.dataSource messageForRowAtIndexPath:indexPath];
-    return [self calculateCellHeightWithMessage:message atIndexPath:indexPath];
+    
+    CGFloat calculateCellHeight = 0;
+    
+    if ([self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:targetMessage:)]) {
+        calculateCellHeight = [self.delegate tableView:tableView heightForRowAtIndexPath:indexPath targetMessage:message];
+        return calculateCellHeight;
+    } else {
+        calculateCellHeight = [self calculateCellHeightWithMessage:message atIndexPath:indexPath];
+    }
+    
+    return calculateCellHeight;
 }
 
 #pragma mark - Key-value Observing

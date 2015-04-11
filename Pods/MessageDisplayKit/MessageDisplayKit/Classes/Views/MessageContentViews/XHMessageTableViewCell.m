@@ -235,7 +235,6 @@ static const CGFloat kXHBubbleMessageViewPadding = 8;
         case XHBubbleMessageMediaTypeText:
         case XHBubbleMessageMediaTypeVoice: {
             self.messageBubbleView.voiceDurationLabel.text = [NSString stringWithFormat:@"%@\'\'", message.voiceDuration];
-//            break;
         }
         case XHBubbleMessageMediaTypeEmotion: {
             UITapGestureRecognizer *tapGestureRecognizer;
@@ -381,8 +380,6 @@ static const CGFloat kXHBubbleMessageViewPadding = 8;
         // 1、是否显示Time Line的label
         if (!_timestampLabel) {
             LKBadgeView *timestampLabel = [[LKBadgeView alloc] initWithFrame:CGRectMake(0, kXHLabelPadding, 160, kXHTimeStampLabelHeight)];
-//#warning change By Zr
-//            LKBadgeView *timestampLabel = [[LKBadgeView alloc] initWithFrame:CGRectMake(0, kXHLabelPadding, 280, kXHTimeStampLabelHeight)];
             timestampLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
             timestampLabel.badgeColor = [UIColor colorWithWhite:0.000 alpha:0.380];
             timestampLabel.textColor = [UIColor whiteColor];

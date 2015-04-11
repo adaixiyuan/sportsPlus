@@ -1,1 +1,0 @@
-../../../MessageDisplayKit/MessageDisplayKit/Classes/Vendor/SECoreTextView/NSMutableAttributedString+Helper.h

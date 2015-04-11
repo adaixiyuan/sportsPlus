@@ -10,6 +10,4 @@
 
 @interface XHMessageTableView : UITableView
 
-
-
 @end

@@ -10,14 +10,14 @@
 #import <CoreLocation/CoreLocation.h>
 #import "XHMessageBubbleFactory.h"
 
+@class XHMessage;
+
 typedef NS_ENUM(NSInteger, XHMessageStatus){
     XHMessageStatusSending,
     XHMessageStatusSent,
     XHMessageStatusReceived,
     XHMessageStatusFailed,
 };
-
-@class XHMessage;
 
 @protocol XHMessageModel <NSObject>
 
@@ -57,9 +57,6 @@ typedef NS_ENUM(NSInteger, XHMessageStatus){
 
 - (BOOL)isRead;
 - (void)setIsRead:(BOOL)isRead;
-
-#warning by zr ;
-- (XHMessageStatus)status ;
 
 @end
 

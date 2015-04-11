@@ -20,13 +20,13 @@ PODS:
   - AFNetworking/UIKit (2.5.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AVOSCloud (2.6.11.1)
+  - AVOSCloud (3.0.2)
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
   - FMDB/common (2.5)
   - FMDB/standard (2.5):
     - FMDB/common
-  - MessageDisplayKit (3.0.1)
+  - MessageDisplayKit (3.0.2)
   - Qiniu (7.0.8):
     - AFNetworking (~> 2.0)
   - RBStoryboardLink (0.1.4)
@@ -34,23 +34,23 @@ PODS:
   - SWTableViewCell (0.3.7)
 
 DEPENDENCIES:
-  - AFNetworking
-  - AVOSCloud
-  - FMDB
-  - MessageDisplayKit
-  - Qiniu
-  - RBStoryboardLink (~> 0.1.0)
-  - Reachability
-  - SWTableViewCell
+  - AFNetworking (= 2.5.1)
+  - AVOSCloud (= 3.0.2)
+  - FMDB (= 2.5)
+  - MessageDisplayKit (= 3.0.2)
+  - Qiniu (= 7.0.8)
+  - RBStoryboardLink (= 0.1.4)
+  - Reachability (= 3.2)
+  - SWTableViewCell (= 0.3.7)
 
 SPEC CHECKSUMS:
-  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  AVOSCloud: 9e1454429268702bbf49260b8f846b611f33e4cc
-  FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
-  MessageDisplayKit: 63e964f5ade8e1666db16fe0c0c660e2429f2aaf
-  Qiniu: 928e087bb94f33537e5d0b4cdbf4d4ccd83a4cd3
-  RBStoryboardLink: 3bc5f6a73a18506e2f980bd0ace79d6847b18aa6
-  Reachability: 1ef8adf5c4e3d362f96515d4278f68dad3c26930
-  SWTableViewCell: 25de71898e3fcd11cf75707ef90245acf990ec03
+  AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
+  AVOSCloud: eeacd471d18b3e24c3cb0d089110453261084489
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  MessageDisplayKit: e92beb7729c548280e52eff1ed5e505d7468f3e3
+  Qiniu: fe983973343cb92be4f2265903f82aa4e2c562c8
+  RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
 COCOAPODS: 0.35.0

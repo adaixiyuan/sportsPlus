@@ -520,6 +520,7 @@
     }];
 }
 
+
 //在DB中获取msg
 -(NSMutableArray*)getDBMsgsWithTimestamp:(int64_t)timestamp limit:(int)limit isLoadMore:(BOOL)isLoadMore db:(FMDatabase*)db{
     NSString* convid=[self getConvid];
