@@ -21,6 +21,8 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AVOSCloud (3.0.2)
+  - AVOSCloudIM (3.0.2):
+    - AVOSCloud
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
   - FMDB/common (2.5)
@@ -36,6 +38,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (= 2.5.1)
   - AVOSCloud (= 3.0.2)
+  - AVOSCloudIM (= 3.0.2)
   - FMDB (= 2.5)
   - MessageDisplayKit (= 3.0.2)
   - Qiniu (= 7.0.8)
@@ -46,6 +49,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
   AVOSCloud: eeacd471d18b3e24c3cb0d089110453261084489
+  AVOSCloudIM: d8ed59fd75220faada6b7305203ce9c42a16595d
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   MessageDisplayKit: e92beb7729c548280e52eff1ed5e505d7468f3e3
   Qiniu: fe983973343cb92be4f2265903f82aa4e2c562c8
