@@ -38,4 +38,11 @@
 
 - (NSString *)toInfoLabelStringOfEnterSchoolJobAndSex ;
 
+/**
+ *  将academy和enterSchoolYear转换成好友申请的显示String
+ *
+ *  @return xxx学院2xxx级
+ */
+- (NSString *)toFriendRequestDisplayLabelString ;
+
 @end

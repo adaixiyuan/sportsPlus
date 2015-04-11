@@ -60,6 +60,11 @@
 }
 
 - (NSMutableArray *)searchFriendListWithName:(NSString *)name {
+    if ([name isEqualToString:@""]) {
+        return [_dataSourceOfFriendList mutableCopy] ;
+    }
+    
+    
     NSMutableArray *searchedFriendList = [NSMutableArray array];
     
     for (spUser *user in _dataSourceOfFriendList) {
@@ -86,9 +91,8 @@
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
-    BOOL networkOnly ;
-    if (refreshControl == nil) networkOnly = NO ;
-        else networkOnly = YES ;
+    BOOL networkOnly= refreshControl!=nil;
+    
     NSLog(@"开始刷新朋友列表") ;
     
     [SPUtils showNetworkIndicator] ;
@@ -115,6 +119,7 @@
 #pragma mark - Life Cycle
 
 - (void)initTableView {
+    
     self.tableView.delegate = self ;
     self.tableView.dataSource = self ;
     {
@@ -135,6 +140,8 @@
     self.searchTextField.clearsOnBeginEditing = YES ;
     
     [self refresh:nil] ;
+    
+    _choosedState = [[NSMutableDictionary alloc] init] ;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -227,11 +234,23 @@
     
     spUser *userForCell = [((ChineseString *)_chineseArray[indexPath.section][indexPath.row]) myUser] ;
     
+    cell.delegate = self ;
+    
     BOOL state = [[_choosedState valueForKey:userForCell.objectId] boolValue] ;
     
     [cell initWithSpUser:userForCell andState:state] ;
     
+    
     return cell ;
+}
+
+#pragma mark - chooseFriendTableViewCellStateDelegate
+
+- (void)didClickedCell:(chooseFriendTableViewCell *)cell changeCellStateTo:(BOOL)state {
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell] ;
+    spUser *userForCell = [((ChineseString *)_chineseArray[indexPath.section][indexPath.row]) myUser] ;
+    
+    [_choosedState setValue:[NSNumber numberWithBool:state] forKey:userForCell.objectId] ;
 }
 
 @end

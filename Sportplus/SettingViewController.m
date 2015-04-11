@@ -213,7 +213,7 @@
                                   initWithTitle:nil
                                   delegate:self
                                   cancelButtonTitle:nil
-                                  destructiveButtonTitle:nil
+                                  destructiveButtonTitle:@"取消"
                                   otherButtonTitles:@"拍照", @"从手机相册中选择",nil];
     self.actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [self.actionSheet showInView:self.view];

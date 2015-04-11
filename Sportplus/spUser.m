@@ -57,4 +57,14 @@
     return info ;
 }
 
+- (NSString *)toFriendRequestDisplayLabelString {
+    NSString *info ;
+    
+    NSString *academy = [self  sP_academy] ;
+    NSNumber *enterSchoolYear = [self sP_enterScYear];
+    
+    info = [NSString stringWithFormat:@"%@%@级",academy,enterSchoolYear] ;
+    
+    return info ;
+}
 @end

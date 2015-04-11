@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "chooseFriendTableViewCell.h"
 
-@interface chooseSportFriendViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface chooseSportFriendViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,chooseFriendTableViewCellStateDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

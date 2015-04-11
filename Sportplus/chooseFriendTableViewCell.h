@@ -10,6 +10,15 @@
 
 #import "spUser.h"
 
+@class chooseFriendTableViewCell ;
+
+@protocol chooseFriendTableViewCellStateDelegate <NSObject>
+@required
+
+- (void)didClickedCell:(chooseFriendTableViewCell *)cell changeCellStateTo:(BOOL)state ;
+
+@end
+
 @interface chooseFriendTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -20,6 +29,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *selectedBtn;
 
+@property id<chooseFriendTableViewCellStateDelegate> delegate ;
 
 - (IBAction)btnClicked:(id)sender;
 

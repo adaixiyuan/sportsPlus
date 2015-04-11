@@ -114,6 +114,7 @@
     {
         [SVProgressHUD dismiss];
 #warning 注意销毁内存        
+        
         [((AppDelegate *)[UIApplication sharedApplication].delegate) toMain] ;
     }
     else{

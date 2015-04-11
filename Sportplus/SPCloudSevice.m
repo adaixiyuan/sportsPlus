@@ -32,6 +32,13 @@
     [AVCloud callFunctionInBackground:@"agreeAddRequest" withParameters:dict block:callback];
 }
 
+/**
+ *  在服务器端通过AVGroup.groupId 创建 SPChatGroup .
+ *
+ *  @param groupId AVGroup.groupId
+ *  @param name     GroupName
+ *  @param callback 回调
+ */
 +(void)saveChatGroupWithId:(NSString*)groupId name:(NSString*)name callback:(AVIdResultBlock)callback{
     NSString* userId=[AVUser currentUser].objectId;
     assert(userId!=nil);

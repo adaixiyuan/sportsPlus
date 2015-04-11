@@ -10,7 +10,7 @@
 #import "spChatGroup.h"
 #import "SPCloudSevice.h"
 #import "SPSessionManager.h"
-//#import "sp"
+#import "SPCacheService.h"
 
 @implementation SPGroupService
 
@@ -39,6 +39,7 @@
         callback([[NSMutableArray alloc] init],nil);
     }
 }
+
 
 +(void)inviteMembersToGroup:(spChatGroup*) chatGroup userIds:(NSArray*)userIds callback:(AVArrayResultBlock)callback {
     AVGroup* group=[self getGroupById:chatGroup.objectId];
@@ -81,14 +82,25 @@
     return session;
 }
 
+
 + (void)saveNewGroupWithName:(NSString*)name withCallback:(AVGroupResultBlock)callback {
     SPSessionManager* man=[SPSessionManager sharedInstance];
+    NSLog(@"开始创建AVGroup") ;
     [AVGroup createGroupWithSession:[self getSession] groupDelegate:man callback:^(AVGroup *group, NSError *error) {
         if(error==nil){
+            NSLog(@"创建AVGroup成功") ;
+            NSLog(@"开始创建SPChatGroup") ;
             [SPCloudSevice saveChatGroupWithId:group.groupId name:name callback:^(id object, NSError *error) {
+                NSLog(@"创建SPChatGroup成功") ;
+                spChatGroup *chatGroup = [spChatGroup objectWithoutDataWithObjectId:object] ;
+#warning !!可能会卡
+                [chatGroup fetch] ;
+                
+                [SPCacheService setCurrentChatGroup:chatGroup] ;
                 callback(group,error);
             }];
         }else{
+            NSLog(@"创建AVGroup失败") ;
             callback(group,error);
         }
     }];

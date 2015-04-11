@@ -58,8 +58,13 @@
     {
         addFriendRequest *addRequest = [_dataSourceOfFriendRequest objectAtIndex:indexPath.row] ;
         
-        [cell.nameLabel setText:@"test"] ;
-        //btn
+        spUser *userForCell = (spUser *)[addRequest fromUser] ;
+        
+        
+        
+        [cell.nameLabel setText:userForCell.sP_userName] ;
+        [cell.academyAndTimeLabel setText:userForCell.toFriendRequestDisplayLabelString] ;
+        
         [cell.acceptFriendRequestButton setTag:indexPath.row] ;
         [cell.acceptFriendRequestButton addTarget:self action:@selector(acceptBtnClicked:) forControlEvents:UIControlEventTouchUpInside] ;
         

@@ -42,6 +42,36 @@
  */
 +(void)findEngagementOfStrangerIsNetWorkOnly:(BOOL)networkOnly ToUser:(spUser *)me WithBlock:(AVArrayResultBlock)block ;
 
+#pragma mark - 好友约伴
+
+/**
+ *  查找有关我（me）的约伴邀请，发出和接收的
+ *
+ *  @param networkOnly 是否请求网络 or 查找缓存
+ *  @param me          currentUser
+ *  @param block       回调block，返回查找到的关于我的约伴亲求数组、NSError
+ */
++(void)findEngagementOfFriendsIsNetWorkOnly:(BOOL)networkOnly ContainUser:(spUser *)me WithBlock:(AVArrayResultBlock)block ;
+
+/**
+ *  查找从我（me）发出的好友约伴邀请
+ *
+ *  @param networkOnly 是否请求网络 or 查找缓存
+ *  @param me          currentUser
+ *  @param block       回调block,返回查找的约伴请求数组、NSError
+ */
++(void)findEngagementOfFriendsIsNetWorkOnly:(BOOL)networkOnly FromUser:(spUser *)me WithBlock:(AVArrayResultBlock)block ;
+
+/**
+ *  查找给我（me）的好友约伴邀请
+ *
+ *  @param networkOnly 是否请求网络 or 查找缓存
+ *  @param me          currentUser
+ *  @param block       回调block,返回查找的约伴请求数组、NSError
+
+ */
++(void)findEngagementOfFriendsIsNetWorkOnly:(BOOL)networkOnly ToUser:(spUser *)me WithBlock:(AVArrayResultBlock)block ;
+
 /**
  *  调用后台方法<engagementWithFriends>，创建好友约伴
  *
@@ -50,8 +80,13 @@
  *  @param date       运动日期
  *  @param stadium    运动场馆
  *  @param block      回调block
+ *  @return engagementWithFriends方法返回EngagementFriend类objectId数组, 顺序按照GroupId中用户的顺序排列
  */
-+(void)tryCreateEngagementToFriends:(NSArray *)friendList sportType:(SPORTSTYPE)sportType date:(NSDate *)date stadium:(spStadium *)stadium WithBlock:(AVObjectResultBlock)block;
++(void)tryCreateEngagementToFriends:(NSArray *)friendList sportType:(SPORTSTYPE)sportType date:(NSDate *)date stadium:(spStadium *)stadium WithBlock:(AVIdResultBlock)block;
 
+
++ (void)acceptEngagementFriend:(spEngagement_Friend *)engagement withBlock:(AVIdResultBlock)block ;
+
++ (void)rejectEngagementFriend:(spEngagement_Friend *)engagement withBlock:(AVIdResultBlock)block ;
 
 @end

@@ -18,6 +18,8 @@ typedef enum {
     SELECTED ,
 } MyBtnState;
 
+
+
 @implementation chooseFriendTableViewCell {
     MyBtnState _state ;
 }
@@ -43,8 +45,10 @@ typedef enum {
 - (IBAction)btnClicked:(id)sender {
     if (_state == NORMAL) {
         [self setState:SELECTED] ;
+        [_delegate didClickedCell:self changeCellStateTo:TRUE] ;
     } else {
         [self setState:NORMAL] ;
+        [_delegate didClickedCell:self changeCellStateTo:FALSE] ;
     }
 }
 

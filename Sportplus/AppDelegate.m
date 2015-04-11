@@ -64,6 +64,16 @@
     self.window.rootViewController = [sb instantiateViewControllerWithIdentifier:@"loginVC"] ;
 }
 
+/**
+ *  打开AVOSCloud SDK的debu开关
+ */
+- (void)openDebugLog{
+    [AVOSCloud setVerbosePolicy:kAVVerboseShow] ;
+    [AVLogger addLoggerDomain:AVLoggerDomainIM] ;
+    [AVLogger addLoggerDomain:AVLoggerDomainCURL] ;
+    [AVLogger setLoggerLevelMask:AVLoggerLevelAll] ;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
@@ -77,7 +87,9 @@
     [AVOSCloud setApplicationId:_AVOSAPPID clientKey:_AVOSAPPKey] ;
 //跟踪应用打开情况!
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions] ;
-
+    
+//    [self openDebugLog] ;
+    
     if (IOS8) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
                                                 | UIUserNotificationTypeBadge

@@ -402,6 +402,7 @@
 		1911EB951A9778E30044F04F /* service */ = {
 			isa = PBXGroup;
 			children = (
+				193DD2D61ACBC132003B086E /* 用户类工具 */,
 				19295F6A1AC6DA4F00E34B5D /* 中文字符串工具 */,
 				19CF5E3A1AC1C29F00BF3094 /* 校区查询 */,
 				1912E6FE1AB8429900CC070A /* 会话管理工具 */,
@@ -412,14 +413,8 @@
 				197DA84C1AB213F100F59116 /* InviteService */,
 				1911EB981A9779A20044F04F /* SPUtils.h */,
 				1911EB991A9779A20044F04F /* SPUtils.m */,
-				19F8059D1AAFC33600F9071A /* SPAddRequestService.h */,
-				19F8059E1AAFC33600F9071A /* SPAddRequestService.m */,
-				19F805A01AAFC56700F9071A /* SPUserService.h */,
-				19F805A11AAFC56700F9071A /* SPUserService.m */,
 				19F805A31AAFCAB200F9071A /* SPCloudSevice.h */,
 				19F805A41AAFCAB200F9071A /* SPCloudSevice.m */,
-				19F805A61AAFD21B00F9071A /* SPGroupService.h */,
-				19F805A71AAFD21B00F9071A /* SPGroupService.m */,
 				197DA83D1AB15FBE00F59116 /* SPCacheService.h */,
 				197DA83E1AB15FBE00F59116 /* SPCacheService.m */,
 			);
@@ -456,6 +451,8 @@
 		1912E6FE1AB8429900CC070A /* 会话管理工具 */ = {
 			isa = PBXGroup;
 			children = (
+				19F805A61AAFD21B00F9071A /* SPGroupService.h */,
+				19F805A71AAFD21B00F9071A /* SPGroupService.m */,
 				19F805AC1AAFDB4B00F9071A /* SPSessionManager.h */,
 				19F805AD1AAFDB4B00F9071A /* SPSessionManager.m */,
 			);
@@ -626,6 +623,17 @@
 				193CEE4E1AA45BF3007A0CF0 /* InviteStrangerViewController.m */,
 			);
 			name = "陌生人约伴";
+			sourceTree = "<group>";
+		};
+		193DD2D61ACBC132003B086E /* 用户类工具 */ = {
+			isa = PBXGroup;
+			children = (
+				19F8059D1AAFC33600F9071A /* SPAddRequestService.h */,
+				19F8059E1AAFC33600F9071A /* SPAddRequestService.m */,
+				19F805A01AAFC56700F9071A /* SPUserService.h */,
+				19F805A11AAFC56700F9071A /* SPUserService.m */,
+			);
+			name = "用户类工具";
 			sourceTree = "<group>";
 		};
 		19620EA21AA6AB0300D09D03 /* 主页 */ = {

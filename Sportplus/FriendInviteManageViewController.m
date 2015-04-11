@@ -8,6 +8,7 @@
 
 #import "FriendInviteManageViewController.h"
 #import "spCommon.h"
+#import "SPInviteService.h"
 
 #define BtnSelectedColor RGBCOLOR(0, 0, 0)
 #define BtnNormalColor RGBCOLOR(234, 234, 234)
@@ -25,11 +26,14 @@ typedef enum {
     NSMutableArray *_dataSourceToDisplay ;//要显示的数据,以上两种之一。更具BtnState判断。
     
     FriendNavBtnState _BtnState ;
+    UIRefreshControl *_refreshControl ;
 }
 
 @end
 
 @implementation FriendInviteManageViewController
+
+#pragma mark - Life Cycle
 
 - (void)setBtnState:(FriendNavBtnState)state {
     _BtnState = state ;
@@ -54,13 +58,23 @@ typedef enum {
     [self.tableView reloadData] ;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)initTableView {
     self.tableView.dataSource = self ;
     self.tableView.delegate = self ;
     
     [self setBtnState:FriendNavBtnStateLeftBtnSelected] ;
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init] ;
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged] ;
+    
+    [self.tableView addSubview:refreshControl] ;
+    _refreshControl = refreshControl ;
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initTableView] ;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,10 +94,17 @@ typedef enum {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"InviteInfoTableViewCell" owner:self options:nil] lastObject];
     }
     
-    /*config cell*/{
-        cell.delegate = self ;
-        NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-        NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    cell.delegate = self ;
+//    [cell setTag:indexPath.row] ;
+    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    
+    if (_BtnState == FriendNavBtnStateLeftBtnSelected) {
+        
+        [leftUtilityButtons sw_addUtilityButtonWithColor:RGBCOLOR(248, 45, 64) title:@"删除"] ;
+    } else {
+        //FriendNavBtnStateRightBtnSelected ;
+
         [rightUtilityButtons sw_addUtilityButtonWithColor:RGBCOLOR(56, 204, 90) title:@"接受"] ;
         [rightUtilityButtons sw_addUtilityButtonWithColor:RGBCOLOR(248, 45 , 64) title:@"拒绝"] ;
         cell.leftUtilityButtons = leftUtilityButtons ;
@@ -96,6 +117,27 @@ typedef enum {
 #pragma mark - SWTableViewCellDelegate
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+    NSInteger cellIndex = [[self.tableView indexPathForCell:cell] row] ;
+    
+    if (_BtnState == FriendNavBtnStateLeftBtnSelected) {
+        //删除
+        NSLog(@"删除") ;
+        [self deleteEngagementAtIndex:cellIndex] ;
+    } else {
+        //FriendNavBtnStateRightBtnSelected ;
+        switch ( index ) {
+            case 0:
+                NSLog(@"接收") ;
+                [self acceptEngagementAtIndex:cellIndex] ;
+                break;
+            case 1 :
+                NSLog(@"拒绝") ;
+                [self rejectEngagementAtIndex:cellIndex] ;
+                break ;
+            default:
+                break;
+        }
+    }
     NSLog(@"index = %ld",(long)index) ;
 }
 
@@ -114,21 +156,69 @@ typedef enum {
 
 #pragma mark - NetWork Method
 
-- (void)getData {
-    //本地获取和网络获取新的。
+- (void)refresh:(UIRefreshControl *)refreshView {
+    BOOL networkOnly = refreshView == nil ? FALSE : TRUE ;
+    
+    [SPUtils showNetworkIndicator] ;
+    
+    if (_BtnState == FriendNavBtnStateLeftBtnSelected) {
+        //邀请我的人
+        [SPInviteService findEngagementOfFriendsIsNetWorkOnly:networkOnly ToUser:[spUser currentUser] WithBlock:^(NSArray *objects, NSError *error) {
+            
+            [SPUtils hideNetworkIndicator] ;
+            [SPUtils stopRefreshControl:_refreshControl] ;
+            
+            if (!error) {
+                _dataSourceOfFriendEngagement = [objects mutableCopy];
+                NSLog(@"收到的邀约 %@",_dataSourceOfFriendEngagement) ;
+                [self.tableView reloadData] ;
+            } else {
+                [SPUtils alertError:error] ;
+            }
+        }] ;
+    } else {
+        //我邀请的人
+        [SPInviteService findEngagementOfFriendsIsNetWorkOnly:networkOnly FromUser:[spUser currentUser] WithBlock:^(NSArray *objects, NSError *error) {
+            [SPUtils hideNetworkIndicator] ;
+            [SPUtils stopRefreshControl:_refreshControl] ;
+            
+            if (!error) {
+                _dataSourceOfMySendedEngagement = [objects mutableCopy] ;
+                NSLog(@"我发送的邀约 %@",_dataSourceOfMySendedEngagement) ;
+                [self.tableView reloadData] ;
+            } else {
+                [SPUtils alertError:error] ;
+            }
+        }] ;
+    }
 }
 
-- (void)accpet {
-    //回戳
+#pragma mark - Normal Method
+
+- (void)acceptEngagementAtIndex:(NSInteger)index {
+    //接收
+    spEngagement_Friend *engagement = (spEngagement_Friend *)[_dataSourceOfFriendEngagement objectAtIndex:index] ;
+//    [SPInviteService ]
+    [SPInviteService acceptEngagementFriend:engagement withBlock:^(id object, NSError *error) {
+#warning !!!
+        [self.tableView reloadData] ;
+    }] ;
+
 }
 
-- (void)reject {
-    //过
+- (void)rejectEngagementAtIndex:(NSInteger)index {
+    //拒绝
+    spEngagement_Friend *engagement = (spEngagement_Friend *)[_dataSourceOfFriendEngagement objectAtIndex:index] ;
+    [SPInviteService rejectEngagementFriend:engagement withBlock:^(id object, NSError *error) {
+#warning !!!
+        [self.tableView reloadData] ;
+    }] ;
 }
 
-- (void)delete {
+- (void)deleteEngagementAtIndex:(NSInteger)index {
     //本地删除记录
     
+    [self.tableView reloadData] ;
 }
 
 

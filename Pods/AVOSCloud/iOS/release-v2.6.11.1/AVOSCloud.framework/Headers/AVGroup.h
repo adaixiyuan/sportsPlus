@@ -121,7 +121,7 @@ typedef void (^AVGroupResultBlock)(AVGroup *group, NSError *error);
  *  @param peerIds 需要邀请的peerId列表
  *  @param callback 结果回调
  */
-- (void)invitePeerIds:(NSArray *)peerIds callback:(AVArrayResultBlock)callback;
+ - (void)invitePeerIds:(NSArray *)peerIds callback:(AVArrayResultBlock)callback;
 
 - (BOOL)invite:(NSArray *)peerIds  AVDeprecated("2.6.4");
 
@@ -130,7 +130,7 @@ typedef void (^AVGroupResultBlock)(AVGroup *group, NSError *error);
  */
 - (void)quit;
 
-@end
+@end 
 
 @protocol AVGroupDelegate <NSObject>
 @optional

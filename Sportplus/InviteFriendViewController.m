@@ -208,6 +208,45 @@
 
 - (IBAction)ensureBtnClicked:(id)sender {
     NSLog(@"确定") ;
+    
+    [SPUtils showNetworkIndicator] ;
+    [SVProgressHUD show] ;
+    [SPInviteService tryCreateEngagementToFriends:_choosedFriendList sportType:_chooseSportType date:_choosedDate stadium:nil WithBlock:^(id object, NSError *error) {
+        [SPUtils hideNetworkIndicator] ;
+        [SVProgressHUD dismiss] ;
+        if (!error) {
+            [SPUtils alert:@"成功"] ;
+            [self.navigationController popToRootViewControllerAnimated:YES] ;
+        } else {
+            [SPUtils alertError:error] ;
+        }
+    }] ;
 }
+
+//-(void)invite{
+//    NSMutableArray* inviteIds=[[NSMutableArray alloc] init];
+//    for(int i=0;i<selected.count;i++){
+//        if([selected[i] boolValue]){
+//            [inviteIds addObject:[potentialIds objectAtIndex:i]];
+//        }
+//    }
+//    UIActivityIndicatorView* indicator=[CDUtils showIndicatorAtView:self.view];
+//    [self inviteMembers:inviteIds callback:^(BOOL succeeded, NSError *error) {
+//        [indicator stopAnimating];
+//        [CDUtils filterError:error callback:^{
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }];
+//    }];
+//}
+//
+//-(void)inviteMembers:(NSArray*)inviteIds callback:(AVBooleanResultBlock)callback{
+//    [CDGroupService inviteMembersToGroup:[CDCacheService getCurrentChatGroup] userIds:inviteIds callback:^(NSArray *objects, NSError *error) {
+//        if(error){
+//            callback(NO,error);
+//        }else{
+//            [CDCacheService refreshCurrentChatGroup:callback];
+//        }
+//    }];
+//}
 
 @end
