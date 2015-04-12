@@ -130,6 +130,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		195E418E1ADAF5F500CB8AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 195E41891ADAF5F400CB8AF7 /* LeanChatLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7059DCD71ACE4ECE009D17AB;
+			remoteInfo = LeanChatLib;
+		};
+		195E41901ADAF5F500CB8AF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 195E41891ADAF5F400CB8AF7 /* LeanChatLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7059DCE21ACE4ECE009D17AB;
+			remoteInfo = LeanChatLibTests;
+		};
 		78C6C87C1A2B411200D8425E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C6C8571A2B411000D8425E /* Project object */;
@@ -190,6 +204,7 @@
 		193CEE511AA4BC24007A0CF0 /* chooseWitchToInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chooseWitchToInviteViewController.m; sourceTree = "<group>"; };
 		193CEE531AA5A5C0007A0CF0 /* InviteFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendViewController.h; sourceTree = "<group>"; };
 		193CEE541AA5A5C0007A0CF0 /* InviteFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendViewController.m; sourceTree = "<group>"; };
+		195E41891ADAF5F400CB8AF7 /* LeanChatLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LeanChatLib.xcodeproj; path = LeanChatLib/LeanChatLib.xcodeproj; sourceTree = "<group>"; };
 		19620EA71AA6AB7800D09D03 /* myHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myHomePageViewController.h; sourceTree = "<group>"; };
 		19620EA81AA6AB7800D09D03 /* myHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myHomePageViewController.m; sourceTree = "<group>"; };
 		197DA83C1AB0DF7200F59116 /* spNotificationCenterIDs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spNotificationCenterIDs.h; sourceTree = "<group>"; };
@@ -636,6 +651,15 @@
 			name = "用户类工具";
 			sourceTree = "<group>";
 		};
+		195E418A1ADAF5F400CB8AF7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				195E418F1ADAF5F500CB8AF7 /* LeanChatLib.framework */,
+				195E41911ADAF5F500CB8AF7 /* LeanChatLibTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		19620EA21AA6AB0300D09D03 /* 主页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,6 +898,7 @@
 		78C6C8561A2B411000D8425E = {
 			isa = PBXGroup;
 			children = (
+				195E41891ADAF5F400CB8AF7 /* LeanChatLib.xcodeproj */,
 				78C6C8611A2B411100D8425E /* Sportplus */,
 				78C6C87E1A2B411200D8425E /* SportplusTests */,
 				78C6C8601A2B411100D8425E /* Products */,
@@ -1113,6 +1138,12 @@
 			mainGroup = 78C6C8561A2B411000D8425E;
 			productRefGroup = 78C6C8601A2B411100D8425E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 195E418A1ADAF5F400CB8AF7 /* Products */;
+					ProjectRef = 195E41891ADAF5F400CB8AF7 /* LeanChatLib.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				78C6C85E1A2B411000D8425E /* Sportplus */,
@@ -1120,6 +1151,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		195E418F1ADAF5F500CB8AF7 /* LeanChatLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LeanChatLib.framework;
+			remoteRef = 195E418E1ADAF5F500CB8AF7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		195E41911ADAF5F500CB8AF7 /* LeanChatLibTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LeanChatLibTests.xctest;
+			remoteRef = 195E41901ADAF5F500CB8AF7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		78C6C85D1A2B411000D8425E /* Resources */ = {
@@ -1422,7 +1470,22 @@
 			baseConfigurationReference = 32E3A11029BD6EE4369FE01C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yuanzhe Chen (XU23TVR88C)";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/AVOSCloud\"",
+					"\"${PODS_ROOT}/Headers/Public/AVOSCloudIM\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/MessageDisplayKit\"",
+					"\"${PODS_ROOT}/Headers/Public/Qiniu\"",
+					"\"${PODS_ROOT}/Headers/Public/RBStoryboardLink\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SWTableViewCell\"",
+					"\"$(PROJECT_DIR)/Frameworks\"",
+					"\"$(PROJECT_DIR)\"",
+				);
 				INFOPLIST_FILE = Sportplus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1437,7 +1500,22 @@
 			baseConfigurationReference = B6A6B0A91962E9C6FD0C4158 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yuanzhe Chen (XU23TVR88C)";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/AVOSCloud\"",
+					"\"${PODS_ROOT}/Headers/Public/AVOSCloudIM\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/MessageDisplayKit\"",
+					"\"${PODS_ROOT}/Headers/Public/Qiniu\"",
+					"\"${PODS_ROOT}/Headers/Public/RBStoryboardLink\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SWTableViewCell\"",
+					"\"$(PROJECT_DIR)/Frameworks\"",
+					"\"$(PROJECT_DIR)\"",
+				);
 				INFOPLIST_FILE = Sportplus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
